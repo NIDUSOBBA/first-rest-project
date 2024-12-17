@@ -54,25 +54,6 @@ public class MeasurementsController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @ExceptionHandler
-    private ResponseEntity<MeasurementsResponseException> handleException(MeasurementsEmptyException e) {
-        MeasurementsResponseException response = new MeasurementsResponseException(
-                "Any of the values or all of them are empty, please fill in each of the parameters value, double and Device",
 
-                LocalDateTime.now()
-        );
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler
-    private ResponseEntity<MeasurementsResponseException> handleException(MeasurementsOutOfBoundsException e) {
-        MeasurementsResponseException response = new MeasurementsResponseException(
-                "The range for value is from +100 to -100",
-                LocalDateTime.now()
-        );
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
 
 }
