@@ -50,11 +50,11 @@ public class  Measurements {
         this.value = value;
     }
 
-    public boolean isRaining() {
+    public Boolean getRaining() {
         return raining;
     }
 
-    public void setRaining(boolean raining) {
+    public void setRaining(Boolean raining) {
         this.raining = raining;
     }
 
@@ -62,8 +62,8 @@ public class  Measurements {
         return sensor;
     }
 
-    public void setSensor(Sensor sensorId) {
-        this.sensor = sensorId;
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
 
     public LocalDateTime getCreatedAt() {
