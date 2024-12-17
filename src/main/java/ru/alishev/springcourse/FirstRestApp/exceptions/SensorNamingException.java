@@ -1,4 +1,4 @@
-package ru.alishev.springcourse.FirstRestApp.util;
+package ru.alishev.springcourse.FirstRestApp.exceptions;
 
 public class SensorNamingException extends RuntimeException {
     public SensorNamingException(String message) {

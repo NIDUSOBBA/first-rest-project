@@ -1,4 +1,4 @@
-package ru.alishev.springcourse.FirstRestApp.util;
+package ru.alishev.springcourse.FirstRestApp.exceptions;
 
 import java.time.LocalDateTime;
 

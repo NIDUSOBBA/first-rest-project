@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDTO;
+import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDto;
 import ru.alishev.springcourse.FirstRestApp.dto.VisualMeasurementsDto;
 import ru.alishev.springcourse.FirstRestApp.models.Measurements;
 import ru.alishev.springcourse.FirstRestApp.services.MeasurementsService;
-import ru.alishev.springcourse.FirstRestApp.services.SensorService;
-import ru.alishev.springcourse.FirstRestApp.util.MeasurementsEmptyException;
-import ru.alishev.springcourse.FirstRestApp.util.MeasurementsOutOfBoundsException;
-import ru.alishev.springcourse.FirstRestApp.util.MeasurementsResponseException;
+import ru.alishev.springcourse.FirstRestApp.services.DeviceService;
+import ru.alishev.springcourse.FirstRestApp.exceptions.MeasurementsEmptyException;
+import ru.alishev.springcourse.FirstRestApp.exceptions.MeasurementsOutOfBoundsException;
+import ru.alishev.springcourse.FirstRestApp.exceptions.MeasurementsResponseException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,49 +24,32 @@ public class MeasurementsController {
 
     private final MeasurementsService measurementsService;
     private final ModelMapper modelMapper;
-    private final SensorService sensorService;
+    private final DeviceService deviceService;
 
     @Autowired
-    public MeasurementsController(MeasurementsService measurementsService, ModelMapper modelMapper, SensorService sensorService) {
+    public MeasurementsController(MeasurementsService measurementsService, ModelMapper modelMapper, DeviceService deviceService) {
         this.measurementsService = measurementsService;
         this.modelMapper = modelMapper;
-        this.sensorService = sensorService;
+        this.deviceService = deviceService;
     }
 
     @GetMapping
     public List<VisualMeasurementsDto> getAllMeasurements() {
 
         // сделать через sream api | all.stream()
-        List<Measurements> all = measurementsService.findAll();
-        List<VisualMeasurementsDto> dtos = new ArrayList<>();
-
-        for (Measurements measurements : all) {
-            dtos.add(measurementsService.creatVisualDto(measurements));
-        }
-        return dtos;
+        return measurementsService.findAll().stream().map(measurementsService::creatVisualDto).toList();
     }
 
     @GetMapping("/rainyDaysCount")
     public List<VisualMeasurementsDto> getRainyDaysCount() {
+
         // сделать через sream api | all.stream()
-        List<Measurements> byMeasurementsIsRaining = measurementsService.findByMeasurementsIsRaining();
-        List<VisualMeasurementsDto> rainDay= new ArrayList<>();
-        for (Measurements measurements : byMeasurementsIsRaining) {
-            rainDay.add(measurementsService.creatVisualDto(measurements));
-        }
-        return rainDay;
+        return measurementsService.findByMeasurementsIsRaining().stream().map(measurementsService::creatVisualDto).toList();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> newForecast(@RequestBody MeasurementsDTO measurementsDTO) {
-        if (measurementsDTO.getValue() == null || measurementsDTO.getSensor() == null || measurementsDTO.isRaining() == null) {
-            throw new MeasurementsEmptyException();
-        }
-        if (measurementsDTO.getValue() > 100 || measurementsDTO.getValue() < -100) {
-            throw new MeasurementsOutOfBoundsException();
-        }
-        Measurements map = modelMapper.map(measurementsDTO, Measurements.class);
-        map.setSensor(sensorService.getSensorByName(measurementsDTO.getSensor().getName()));
+    public ResponseEntity<HttpStatus> newForecast(@RequestBody MeasurementsDto measurementsDTO) {
+
 
         measurementsService.save(map);
 
@@ -76,9 +59,9 @@ public class MeasurementsController {
     @ExceptionHandler
     private ResponseEntity<MeasurementsResponseException> handleException(MeasurementsEmptyException e) {
         MeasurementsResponseException response = new MeasurementsResponseException(
-                "Any of the values or all of them are empty, please fill in each of the parameters value, double and Sensor",
+                "Any of the values or all of them are empty, please fill in each of the parameters value, double and Device",
 
- LocalDateTime.now()
+                LocalDateTime.now()
         );
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

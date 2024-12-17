@@ -1,23 +1,23 @@
 package ru.alishev.springcourse.FirstRestApp.util;
 
-import ru.alishev.springcourse.FirstRestApp.models.Sensor;
+import ru.alishev.springcourse.FirstRestApp.models.Device;
 
 import java.util.Random;
 
-public class Randomaser {
+public class Randomized {
     private final Random random = new Random();
 
-    public Sensor randomSensor() {
-        Sensor sensor = new Sensor();
+    public Device randomSensor() {
+        Device device = new Device();
         var v = Math.random() * 3;
         if (v < 1) {
-            sensor.setName("Test1");
+            device.setName("Test1");
         } else if (v >= 1) {
-            sensor.setName("Test2");
+            device.setName("Test2");
         } else {
-            sensor.setName("Test3");
+            device.setName("Test3");
         }
-        return sensor;
+        return device;
     }
 
     public boolean randomRaining() {

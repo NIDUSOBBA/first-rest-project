@@ -1,11 +1,15 @@
 package ru.alishev.springcourse.FirstRestApp.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class  Measurements {
 
     @Id
@@ -20,7 +24,7 @@ public class  Measurements {
 
     @ManyToOne()
     @JoinColumn(name = "sensor_id")
-    private Sensor sensor;
+    private Device device;
 
     @Column
     private LocalDateTime createdAt;
@@ -28,49 +32,10 @@ public class  Measurements {
     public Measurements() {
     }
 
-    public Measurements(double value, boolean raining, Sensor sensorId) {
+    public Measurements(double value, boolean raining, Device deviceId) {
         this.value = value;
         this.raining = raining;
-        this.sensor = sensorId;
+        this.device = deviceId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public Boolean getRaining() {
-        return raining;
-    }
-
-    public void setRaining(Boolean raining) {
-        this.raining = raining;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }
