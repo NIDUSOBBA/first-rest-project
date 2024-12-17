@@ -1,21 +1,13 @@
 package ru.alishev.springcourse.FirstRestApp.controllers;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDto;
 import ru.alishev.springcourse.FirstRestApp.dto.VisualMeasurementsDto;
-import ru.alishev.springcourse.FirstRestApp.models.Measurements;
 import ru.alishev.springcourse.FirstRestApp.services.MeasurementsService;
-import ru.alishev.springcourse.FirstRestApp.services.DeviceService;
-import ru.alishev.springcourse.FirstRestApp.exceptions.MeasurementsEmptyException;
-import ru.alishev.springcourse.FirstRestApp.exceptions.MeasurementsOutOfBoundsException;
-import ru.alishev.springcourse.FirstRestApp.exceptions.MeasurementsResponseException;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,14 +15,11 @@ import java.util.List;
 public class MeasurementsController {
 
     private final MeasurementsService measurementsService;
-    private final ModelMapper modelMapper;
-    private final DeviceService deviceService;
+
 
     @Autowired
-    public MeasurementsController(MeasurementsService measurementsService, ModelMapper modelMapper, DeviceService deviceService) {
+    public MeasurementsController(MeasurementsService measurementsService) {
         this.measurementsService = measurementsService;
-        this.modelMapper = modelMapper;
-        this.deviceService = deviceService;
     }
 
     @GetMapping
