@@ -9,29 +9,30 @@ public class Randomaser {
 
     public Sensor randomSensor() {
         Sensor sensor = new Sensor();
-        if(Math.random()*3 < 1){
+        var v = Math.random() * 3;
+        if (v < 1) {
             sensor.setName("Test1");
-        } else if (Math.random()*3 >= 1) {
+        } else if (v >= 1) {
             sensor.setName("Test2");
-        }else {
+        } else {
             sensor.setName("Test3");
         }
         return sensor;
     }
 
-    public boolean randomRaining(){
-        return int1();
+    public boolean randomRaining() {
+        return getRandomInt();
     }
 
-    public double randomValue(){
-        if(int1()){
-            return random.nextDouble()*100;
-        }else {
-            return -random.nextDouble()*100;
+    public double randomValue() {
+        if (getRandomInt()) {
+            return random.nextDouble() * 100;
+        } else {
+            return -random.nextDouble() * 100;
         }
     }
 
-    private boolean int1(){
-        return random.nextInt()*4 <= 1;
+    private boolean getRandomInt() {
+        return random.nextInt() * 4 <= 1;
     }
 }

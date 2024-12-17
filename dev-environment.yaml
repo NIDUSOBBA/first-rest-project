@@ -1,0 +1,19 @@
+version: '3.8'
+
+volumes:
+  postgres-data:
+
+services:
+  postgres_db:
+    image: postgres
+    hostname: postgres_db
+    container_name: rest_app_db
+    restart: no
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+      POSTGRES_DB: rest_app_db
+    ports:
+      - "5432:5432"

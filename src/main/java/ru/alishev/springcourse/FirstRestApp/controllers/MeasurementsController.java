@@ -35,6 +35,8 @@ public class MeasurementsController {
 
     @GetMapping
     public List<VisualMeasurementsDto> getAllMeasurements() {
+
+        // сделать через sream api | all.stream()
         List<Measurements> all = measurementsService.findAll();
         List<VisualMeasurementsDto> dtos = new ArrayList<>();
 
@@ -46,6 +48,7 @@ public class MeasurementsController {
 
     @GetMapping("/rainyDaysCount")
     public List<VisualMeasurementsDto> getRainyDaysCount() {
+        // сделать через sream api | all.stream()
         List<Measurements> byMeasurementsIsRaining = measurementsService.findByMeasurementsIsRaining();
         List<VisualMeasurementsDto> rainDay= new ArrayList<>();
         for (Measurements measurements : byMeasurementsIsRaining) {

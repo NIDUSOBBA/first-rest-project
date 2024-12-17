@@ -23,6 +23,7 @@ public class FirstRestAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FirstRestAppApplication.class, args);
 
+		// убрать ищ main, реализовать эту логику в отдельном классе и вызывать через @PostConstruct
 		RestTemplate template = new RestTemplate();
 		Randomaser randomaser = new Randomaser();
 
