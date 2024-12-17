@@ -49,9 +49,7 @@ public class MeasurementsController {
 
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> newForecast(@RequestBody MeasurementsDto measurementsDTO) {
-
-
-        measurementsService.save(map);
+        measurementsService.save(measurementsDTO);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
