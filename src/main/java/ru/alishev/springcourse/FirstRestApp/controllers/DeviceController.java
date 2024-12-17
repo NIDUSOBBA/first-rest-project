@@ -19,15 +19,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sensor")
-public class SensorController {
+@RequestMapping("/device")
+public class DeviceController {
 
     private final SensorService sensorService;
     private final ModelMapper modelMapper;
     private final SensorValidator sensorValidator;
 
     @Autowired
-    public SensorController(SensorService sensorService, ModelMapper modelMapper, SensorValidator sensorValidator) {
+    public DeviceController(SensorService sensorService, ModelMapper modelMapper, SensorValidator sensorValidator) {
         this.sensorService = sensorService;
         this.modelMapper = modelMapper;
         this.sensorValidator = sensorValidator;
