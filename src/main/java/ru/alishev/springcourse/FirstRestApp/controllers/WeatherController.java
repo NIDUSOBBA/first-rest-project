@@ -3,6 +3,8 @@ package ru.alishev.springcourse.FirstRestApp.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDto;
@@ -34,7 +36,11 @@ public class WeatherController {
     }
 
     @PostMapping("/measurements/add")
-    public ResponseEntity<HttpStatus> newForecast(@RequestBody MeasurementsDto measurementsDTO) {
+    public ResponseEntity<HttpStatus> newForecast(@Validated @RequestBody MeasurementsDto measurementsDTO,
+                                                  BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(HttpStatus.BAD_REQUEST);
+        }
         measurementsService.save(measurementsDTO);
 
         return ResponseEntity.ok(HttpStatus.OK);
