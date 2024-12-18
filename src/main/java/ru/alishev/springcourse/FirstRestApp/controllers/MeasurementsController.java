@@ -1,10 +1,7 @@
 package ru.alishev.springcourse.FirstRestApp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDto;
 import ru.alishev.springcourse.FirstRestApp.dto.VisualMeasurementsDto;
 import ru.alishev.springcourse.FirstRestApp.services.MeasurementsService;
 
