@@ -11,5 +11,5 @@ public class MeasurementsDto {
 
     private Boolean raining;
 
-    private Device divece;
+    private Device device;
 }

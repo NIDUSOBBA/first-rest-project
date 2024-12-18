@@ -39,7 +39,7 @@ public class CompletingTask {
             MeasurementsDto temp = new MeasurementsDto();
             temp.setValue(randomaser.randomValue());
             temp.setRaining(randomaser.randomRaining());
-            temp.setDivece(randomaser.randomSensor());
+            temp.setDevice(randomaser.randomSensor());
             HttpEntity<MeasurementsDto> request = new HttpEntity<>(temp, headers);
             template.postForEntity(postAddMeasurements, request, String.class);
         }

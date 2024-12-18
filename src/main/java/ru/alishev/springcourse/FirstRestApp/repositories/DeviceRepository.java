@@ -6,6 +6,5 @@ import ru.alishev.springcourse.FirstRestApp.models.Device;
 
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
-
-     Device getSensorByName(String name);
+     Device getDeviceByName(String name);
 }

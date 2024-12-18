@@ -29,19 +29,7 @@ public class MeasurementsController {
         return measurementsService.findAll().stream().map(measurementsService::creatVisualDto).toList();
     }
 
-    @GetMapping("/rainyDaysCount")
-    public List<VisualMeasurementsDto> getRainyDaysCount() {
 
-        // сделать через sream api | all.stream()
-        return measurementsService.findByMeasurementsIsRaining().stream().map(measurementsService::creatVisualDto).toList();
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<HttpStatus> newForecast(@RequestBody MeasurementsDto measurementsDTO) {
-        measurementsService.save(measurementsDTO);
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
 
 
 
