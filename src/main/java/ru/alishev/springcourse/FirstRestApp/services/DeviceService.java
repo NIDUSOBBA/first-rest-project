@@ -27,7 +27,7 @@ public class DeviceService {
     @Transactional
     public void save(Device device) {
         device.setCreatedAt(LocalDateTime.now());
-        device.setCreatedWhi("WeatherSensor");
+        device.setCreatedWhy("WeatherSensor");
         deviceRepository.save(device);
     }
 

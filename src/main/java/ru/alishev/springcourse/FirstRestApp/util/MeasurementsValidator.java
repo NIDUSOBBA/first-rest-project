@@ -10,7 +10,7 @@ import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDto;
 public class MeasurementsValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
-        return false;
+        return MeasurementsDto.class.equals(clazz);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class MeasurementsValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "raining", "field.required", "raining cannot be empty");
 
         if (measurementsDto.getValue() > 100 || measurementsDto.getValue() < -100) {
-            throw new IllegalArgumentException("Invalid measurements. One of the three values is out of range");
+            errors.rejectValue("value", "field.invalid", "value must be between -100 and 100");
         }
     }
 }

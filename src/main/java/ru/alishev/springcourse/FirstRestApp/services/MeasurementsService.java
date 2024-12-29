@@ -48,7 +48,7 @@ public class MeasurementsService {
         VisualMeasurementsDto visualDto = new VisualMeasurementsDto();
         visualDto.setRaining(measurements.getRaining());
         visualDto.setValue(measurements.getValue());
-        visualDto.setSensorName(measurements.getDevice().getName());
+        visualDto.setDeviceName(measurements.getDevice().getName());
         return visualDto;
     }
 

@@ -27,10 +27,10 @@ public class DeviceValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.required", "Name cannot be empty");
 
         if(deviceService.getSensorByName(deviceDto.getName()) != null) {
-                throw new IllegalArgumentException("Device with name '" + deviceDto.getName() + "' already exists!");
+            errors.rejectValue("name", "duplicate", "Device with name '" + deviceDto.getName() + "' already exists!");
         }
         if(deviceDto.getName().length() < 2){
-            throw new IllegalArgumentException("The name must be between 2 and 30 characters long!");
+            errors.rejectValue("name", "length", "Length must be between 2 and 20 characters!");
         }
 
 

@@ -23,7 +23,7 @@ public class  Measurements {
     private Boolean raining;
 
     @ManyToOne()
-    @JoinColumn(name = "sensor_id")
+    @JoinColumn(name = "device_id")
     private Device device;
 
     @Column

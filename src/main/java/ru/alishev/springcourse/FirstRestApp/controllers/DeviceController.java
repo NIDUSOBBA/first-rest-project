@@ -36,6 +36,7 @@ public class DeviceController {
     public ResponseEntity<HttpStatus> registrationSignal(@RequestBody @Validated DeviceDto deviceDto,
                                                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(HttpStatus.BAD_REQUEST);
         }
 

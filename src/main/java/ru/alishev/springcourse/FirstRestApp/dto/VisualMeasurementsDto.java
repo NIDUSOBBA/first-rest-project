@@ -11,6 +11,6 @@ public class VisualMeasurementsDto {
 
     private Boolean raining;
 
-    private String sensorName;
+    private String deviceName;
 
 }

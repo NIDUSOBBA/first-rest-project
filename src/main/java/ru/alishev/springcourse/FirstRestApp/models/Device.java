@@ -28,7 +28,7 @@ public class Device {
     private LocalDateTime createdAt;
 
     @Column
-    private String createdWhi;
+    private String createdWhy;
 
     @OneToMany(mappedBy = "device")
     private List<Measurements> measurements;

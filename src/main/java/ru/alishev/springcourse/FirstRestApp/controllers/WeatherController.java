@@ -23,6 +23,11 @@ public class WeatherController {
         this.measurementsService = measurementsService;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(new MeasurementsValidator());
+    }
+
     @GetMapping("/measurements/rainyDaysCount")
     public List<VisualMeasurementsDto> getRainyDaysCount() {
 
@@ -30,15 +35,11 @@ public class WeatherController {
         return measurementsService.findByMeasurementsIsRaining().stream().map(measurementsService::creatVisualDto).toList();
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setValidator(new MeasurementsValidator());
-    }
-
     @PostMapping("/measurements/add")
     public ResponseEntity<HttpStatus> newForecast(@Validated @RequestBody MeasurementsDto measurementsDTO,
                                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(HttpStatus.BAD_REQUEST);
         }
         measurementsService.save(measurementsDTO);
