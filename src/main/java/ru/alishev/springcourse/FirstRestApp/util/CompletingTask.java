@@ -2,11 +2,14 @@ package ru.alishev.springcourse.FirstRestApp.util;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import ru.alishev.springcourse.FirstRestApp.controllers.DeviceController;
 import ru.alishev.springcourse.FirstRestApp.dto.MeasurementsDto;
 
 import java.util.HashMap;
@@ -22,7 +25,7 @@ public class CompletingTask {
         this.template = template;
     }
 
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void init() {
         Randomized randomized = new Randomized();
 
